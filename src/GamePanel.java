@@ -63,16 +63,15 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void move(){
-        for(int i = bodyParts; i > 0; i--){
-            x[i] = x[i-1];
-            y[i] = y[i-1];
-
-            switch (direction) {
-                case 'U' -> y[0] = y[0] - UNIT_SIZE;
-                case 'D' -> y[0] = y[0] + UNIT_SIZE;
-                case 'L' -> x[0] = x[0] - UNIT_SIZE;
-                case 'R' -> x[0] = x[0] + UNIT_SIZE;
-            }
+        for(int i = bodyParts; i > 0; i--) {
+            x[i] = x[i - 1];
+            y[i] = y[i - 1];
+        }
+        switch (direction) {
+            case 'U' -> y[0] = y[0] - UNIT_SIZE;
+            case 'D' -> y[0] = y[0] + UNIT_SIZE;
+            case 'L' -> x[0] = x[0] - UNIT_SIZE;
+            case 'R' -> x[0] = x[0] + UNIT_SIZE;
         }
     }
 
@@ -80,18 +79,18 @@ public class GamePanel extends JPanel implements ActionListener {
         random = new Random();
         appleX = random.nextInt(SCREEN_WIDTH/UNIT_SIZE) * UNIT_SIZE;
         appleY = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE) * UNIT_SIZE;
-
-        System.out.println(appleX + ", " + appleY);
-
-
     }
 
     public void checkApple(){
-
+        // if the current position of the head is equal to the current position of the apple
+            // increase apples eaten
+            // randomly create a new object on the screen
     }
 
     public void checkCollisions(){
-
+        // if the head of the snake is equal to a border
+        // negative or greater than SCREEN_WIDTH || SCREEN_HEIGHT
+            // end the game
     }
 
     public void gameOver(Graphics g){
@@ -100,7 +99,12 @@ public class GamePanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(running){
+            move();
+            checkApple();
+            checkCollisions();
+        }
+        repaint();
     }
 
     public static class MyKeyAdapter extends KeyAdapter {
